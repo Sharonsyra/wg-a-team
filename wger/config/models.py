@@ -37,7 +37,8 @@ class LanguageConfig(models.Model):
     '''
     Configuration for languages
 
-    Allows to specify what exercises and ingredients are shown for each language
+    Allows to specify what exercises and ingredients are
+    shown for each language
     '''
     SHOW_ITEM_EXERCISES = '1'
     SHOW_ITEM_INGREDIENTS = '2'
@@ -77,7 +78,8 @@ class LanguageConfig(models.Model):
         super(LanguageConfig, self).save(*args, **kwargs)
 
         # Cached objects
-        cache.delete(cache_mapper.get_language_config_key(self.language, self.item))
+        cache.delete(cache_mapper.get_language_config_key(self.language,
+                                                          self.item))
 
         # Cached template fragments
         delete_template_fragment_cache('muscle-overview', self.language_id)
@@ -89,7 +91,8 @@ class LanguageConfig(models.Model):
         '''
 
         # Cached objects
-        cache.delete(cache_mapper.get_language_config_key(self.language, self.item))
+        cache.delete(cache_mapper.get_language_config_key(self.language,
+                                                          self.item))
 
         # Cached template fragments
         delete_template_fragment_cache('muscle-overview', self.language_id)
